@@ -42,8 +42,8 @@
             <referencesTable>Colonias</referencesTable>
             <referencesField><![CDATA[id_colonia]]></referencesField>
             <referencesTable><![CDATA[Colonias]]></referencesTable>
-            <sourceCardinality>1</sourceCardinality>
-            <destinationCardinality>5</destinationCardinality>
+            <sourceCardinality>5</sourceCardinality>
+            <destinationCardinality>1</destinationCardinality>
             <referencesFieldUID><![CDATA[9EA4ACF4-00CD-48C0-AFC3-320900C36C2D]]></referencesFieldUID>
             <referencesTableUID><![CDATA[5817E714-A39B-473B-9121-63D103867519]]></referencesTableUID>
             <didChangeNameDuringValidation><![CDATA[0]]></didChangeNameDuringValidation>
@@ -56,8 +56,8 @@
             <referencesTable>Tipos_Unidades</referencesTable>
             <referencesField><![CDATA[id_tipo_unidad]]></referencesField>
             <referencesTable><![CDATA[Tipos_Unidades]]></referencesTable>
-            <sourceCardinality>1</sourceCardinality>
-            <destinationCardinality>5</destinationCardinality>
+            <sourceCardinality>0</sourceCardinality>
+            <destinationCardinality>0</destinationCardinality>
             <referencesFieldUID><![CDATA[CCFADDF2-0D23-4B88-9409-15F47E1EF283]]></referencesFieldUID>
             <referencesTableUID><![CDATA[5FAED0BB-3107-466D-A066-EC14EB9DB7F1]]></referencesTableUID>
             <didChangeNameDuringValidation><![CDATA[0]]></didChangeNameDuringValidation>
@@ -284,7 +284,7 @@
         <name><![CDATA[Eras]]></name>
         <schema><![CDATA[]]></schema>
         <location>
-            <x>641.000000</x>
+            <x>640.000000</x>
             <y>400.000000</y>
         </location>
         <size>
@@ -381,8 +381,8 @@
         <name><![CDATA[Nota_1]]></name>
         <comment><![CDATA[No esta relacionado al id_equipo, sino que esta relacionado al orden del equipo actual]]></comment>
         <location>
-            <x>885.000000</x>
-            <y>314.000000</y>
+            <x>904.000000</x>
+            <y>313.000000</y>
         </location>
         <size>
             <width>100.000000</width>
