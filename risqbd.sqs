@@ -4,14 +4,14 @@
         <name><![CDATA[Nota]]></name>
         <comment><![CDATA[Esta tabla es para seguimiento de eras]]></comment>
         <location>
-            <x>900.000000</x>
-            <y>73.000000</y>
+            <x>887.000000</x>
+            <y>150.000000</y>
         </location>
         <size>
             <width>103.000000</width>
             <height>83.000000</height>
         </size>
-        <zorder>8</zorder>
+        <zorder>7</zorder>
         <commentTitle><![CDATA[Nota]]></commentTitle>
         <temporaryOriginalName><![CDATA[Not]]></temporaryOriginalName>
         <uid><![CDATA[24FD568E-20FB-4520-B45F-756A4425A3B8]]></uid>
@@ -56,8 +56,8 @@
             <referencesTable>Tipos_Unidades</referencesTable>
             <referencesField><![CDATA[id_tipo_unidad]]></referencesField>
             <referencesTable><![CDATA[Tipos_Unidades]]></referencesTable>
-            <sourceCardinality>0</sourceCardinality>
-            <destinationCardinality>0</destinationCardinality>
+            <sourceCardinality>5</sourceCardinality>
+            <destinationCardinality>1</destinationCardinality>
             <referencesFieldUID><![CDATA[CCFADDF2-0D23-4B88-9409-15F47E1EF283]]></referencesFieldUID>
             <referencesTableUID><![CDATA[5FAED0BB-3107-466D-A066-EC14EB9DB7F1]]></referencesTableUID>
             <didChangeNameDuringValidation><![CDATA[0]]></didChangeNameDuringValidation>
@@ -235,7 +235,7 @@
             <name><![CDATA[orden]]></name>
             <type><![CDATA[NUMBER(1)]]></type>
             <didChangeNameDuringValidation><![CDATA[0]]></didChangeNameDuringValidation>
-            <forcedUnique><![CDATA[1]]></forcedUnique>
+            <forcedUnique><![CDATA[0]]></forcedUnique>
             <uid><![CDATA[7CB22198-9242-4256-81D9-D9A7ED6B26EF]]></uid>
         </SQLField>
         <didChangeNameDuringValidation><![CDATA[0]]></didChangeNameDuringValidation>
@@ -281,50 +281,55 @@
         <uid><![CDATA[9CF3A578-68DB-4721-994B-8E561BF4AE88]]></uid>
     </SQLTable>
     <SQLTable>
-        <name><![CDATA[Eras]]></name>
+        <name><![CDATA[Juegos]]></name>
         <schema><![CDATA[]]></schema>
         <location>
-            <x>640.000000</x>
-            <y>400.000000</y>
+            <x>636.000000</x>
+            <y>396.000000</y>
         </location>
         <size>
             <width>207.000000</width>
-            <height>60.000000</height>
+            <height>80.000000</height>
         </size>
         <zorder>6</zorder>
         <SQLField>
-            <name><![CDATA[id_era]]></name>
-            <type><![CDATA[NUMBER(3)]]></type>
-            <primaryKey>1</primaryKey>
-            <didChangeNameDuringValidation><![CDATA[0]]></didChangeNameDuringValidation>
-            <forcedUnique><![CDATA[1]]></forcedUnique>
-            <uid><![CDATA[FEF939CB-D9D7-4712-8C6D-695350F9989C]]></uid>
-        </SQLField>
-        <SQLField>
             <name><![CDATA[equipo_actual]]></name>
-            <type><![CDATA[NUMBER(1)]]></type>
-            <referencesField>orden</referencesField>
+            <type><![CDATA[NUMBER(3)]]></type>
+            <referencesField>id_equipo</referencesField>
             <referencesTable>Equipos</referencesTable>
-            <referencesField><![CDATA[orden]]></referencesField>
+            <referencesField><![CDATA[id_equipo]]></referencesField>
             <referencesTable><![CDATA[Equipos]]></referencesTable>
-            <sourceCardinality>0</sourceCardinality>
-            <destinationCardinality>0</destinationCardinality>
-            <referencesFieldUID><![CDATA[7CB22198-9242-4256-81D9-D9A7ED6B26EF]]></referencesFieldUID>
+            <sourceCardinality>1</sourceCardinality>
+            <destinationCardinality>1</destinationCardinality>
+            <referencesFieldUID><![CDATA[329F0B2D-F0BE-4E62-A3C4-E032A17CA022]]></referencesFieldUID>
             <referencesTableUID><![CDATA[7F7F6F63-D193-4C8E-BF81-983BB9387034]]></referencesTableUID>
             <didChangeNameDuringValidation><![CDATA[0]]></didChangeNameDuringValidation>
             <uid><![CDATA[3A1CD5D1-D3BA-4217-ADA6-7855F1A7FF2D]]></uid>
         </SQLField>
+        <SQLField>
+            <name><![CDATA[era_actual]]></name>
+            <type><![CDATA[NUMBER(1)]]></type>
+            <didChangeNameDuringValidation><![CDATA[0]]></didChangeNameDuringValidation>
+            <uid><![CDATA[3B0F5E15-762C-45FA-BE80-DE447BB7782A]]></uid>
+        </SQLField>
+        <SQLField>
+            <name><![CDATA[cant_eras]]></name>
+            <type><![CDATA[NUMBER(1)]]></type>
+            <defaultValue><![CDATA[5]]></defaultValue>
+            <didChangeNameDuringValidation><![CDATA[0]]></didChangeNameDuringValidation>
+            <uid><![CDATA[B59E95AB-E0FA-40D1-B0BC-BF93E1E7FB59]]></uid>
+        </SQLField>
         <didChangeNameDuringValidation><![CDATA[0]]></didChangeNameDuringValidation>
         <labelColor><![CDATA[{1,0.713092,0,1}]]></labelColor>
-        <temporaryOriginalName><![CDATA[Table7]]></temporaryOriginalName>
+        <temporaryOriginalName><![CDATA[Juegos]]></temporaryOriginalName>
         <uid><![CDATA[A04E1C92-1452-4447-B196-AC59C69D4464]]></uid>
     </SQLTable>
     <SQLTable>
         <name><![CDATA[Resultados_Eras]]></name>
         <schema><![CDATA[]]></schema>
         <location>
-            <x>586.000000</x>
-            <y>110.000000</y>
+            <x>591.000000</x>
+            <y>138.000000</y>
         </location>
         <size>
             <width>239.000000</width>
@@ -359,40 +364,16 @@
             <uid><![CDATA[591A50E6-BEF9-4685-ACFE-68B3F229A50A]]></uid>
         </SQLField>
         <SQLField>
-            <name><![CDATA[id_era]]></name>
-            <type><![CDATA[NUMBER(3)]]></type>
-            <referencesField>id_era</referencesField>
-            <referencesTable>Eras</referencesTable>
-            <referencesField><![CDATA[id_era]]></referencesField>
-            <referencesTable><![CDATA[Eras]]></referencesTable>
-            <sourceCardinality>5</sourceCardinality>
-            <destinationCardinality>1</destinationCardinality>
-            <referencesFieldUID><![CDATA[FEF939CB-D9D7-4712-8C6D-695350F9989C]]></referencesFieldUID>
-            <referencesTableUID><![CDATA[A04E1C92-1452-4447-B196-AC59C69D4464]]></referencesTableUID>
+            <name><![CDATA[num_era]]></name>
+            <type><![CDATA[NUMBER(1)]]></type>
             <didChangeNameDuringValidation><![CDATA[0]]></didChangeNameDuringValidation>
-            <uid><![CDATA[8295010F-AC35-4B9B-84F4-29169607E82C]]></uid>
+            <uid><![CDATA[653C6425-D879-4184-A47F-7982374E0378]]></uid>
         </SQLField>
         <didChangeNameDuringValidation><![CDATA[0]]></didChangeNameDuringValidation>
         <labelColor><![CDATA[{0.418185,0.250852,1,1}]]></labelColor>
         <temporaryOriginalName><![CDATA[Resultado_Era]]></temporaryOriginalName>
         <uid><![CDATA[B074F64A-08CD-4647-8827-0366A5537CD3]]></uid>
     </SQLTable>
-    <SQLComment>
-        <name><![CDATA[Nota_1]]></name>
-        <comment><![CDATA[No esta relacionado al id_equipo, sino que esta relacionado al orden del equipo actual]]></comment>
-        <location>
-            <x>904.000000</x>
-            <y>313.000000</y>
-        </location>
-        <size>
-            <width>100.000000</width>
-            <height>131.000000</height>
-        </size>
-        <zorder>7</zorder>
-        <commentTitle><![CDATA[Nota]]></commentTitle>
-        <temporaryOriginalName><![CDATA[Not]]></temporaryOriginalName>
-        <uid><![CDATA[DD9093E3-1B2E-4923-B188-D0D5F481DC45]]></uid>
-    </SQLComment>
     <SQLDocumentInfo>
         <encodedPrintInfo><![CDATA[BAtzdHJlYW10eXBlZIHoA4QBQISEhAtOU1ByaW50SW5mbwGEhAhOU09iamVjdACF
 koSEhBNOU011dGFibGVEaWN0aW9uYXJ5AISEDE5TRGljdGlvbmFyeQCUhAFpDZKE
