@@ -8,7 +8,7 @@
     1. Facilitar las COMPRAS de regimientos/comandantes **Jesús**
     2. Realizar los COMBATES (Lanzar dados; eliminar regimientos;
     invadir un territorio) **Dylhann & Ernesto**
-    3. Movilizar los regimientos entre las colonias conectadas **Dylhann & Ernesto**
+    3. Movilizar los regimientos entre las colonias conectadas **Sebastián**
 
 8. Al final de la ERA, calcular los puntos de cada ejército y asignar los turnos
 para la siguiente. **Jesús**
