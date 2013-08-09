@@ -1,8 +1,8 @@
 DROP TABLE Unidades;
 DROP TABLE Colonias;
 DROP TABLE Continentes;
+DROP TABLE Juegos;
 DROP TABLE Resultados_Eras;
-DROP TABLE Eras;
 DROP TABLE Equipos;
 DROP TABLE Tipos_Unidades;
 
@@ -20,7 +20,7 @@ id_equipo NUMBER(3),
 color VARCHAR2(10),
 energia NUMBER(3),
 fase_actual NUMBER(1),
-orden NUMBER(1) UNIQUE,
+orden NUMBER(1),
 PRIMARY KEY (id_equipo)
 );
 
@@ -54,11 +54,11 @@ id_tipo_unidad NUMBER(3),
 PRIMARY KEY (id_unidad)
 );
 
-CREATE TABLE Eras
+CREATE TABLE Juegos
 (
-id_era NUMBER(3),
-equipo_actual NUMBER(1),
-PRIMARY KEY (id_era)
+equipo_actual NUMBER(3),
+era_actual NUMBER(1),
+cant_eras NUMBER(1) DEFAULT '5'
 );
 
 CREATE TABLE Resultados_Eras
@@ -66,7 +66,7 @@ CREATE TABLE Resultados_Eras
 id_resultado_era NUMBER(3),
 id_equipo NUMBER(3),
 puntaje NUMBER(3),
-id_era NUMBER(3),
+num_era NUMBER(1),
 PRIMARY KEY (id_resultado_era)
 );
 
@@ -78,8 +78,6 @@ ALTER TABLE Unidades ADD FOREIGN KEY (id_colonia) REFERENCES Colonias (id_coloni
 
 ALTER TABLE Unidades ADD FOREIGN KEY (id_tipo_unidad) REFERENCES Tipos_Unidades (id_tipo_unidad);
 
-ALTER TABLE Eras ADD FOREIGN KEY (equipo_actual) REFERENCES Equipos (orden);
+ALTER TABLE Juegos ADD FOREIGN KEY (equipo_actual) REFERENCES Equipos (id_equipo);
 
 ALTER TABLE Resultados_Eras ADD FOREIGN KEY (id_equipo) REFERENCES Equipos (id_equipo);
-
-ALTER TABLE Resultados_Eras ADD FOREIGN KEY (id_era) REFERENCES Eras (id_era);
