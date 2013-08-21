@@ -8,6 +8,7 @@ is
     valor_regular int;
     temp int;
     bandera int := 1;
+    contador int := 0;
 begin
     -- cantidad de dados especiales a lanzar
     select count(id_unidad)
@@ -39,29 +40,33 @@ begin
     where id_tipo_unidad = 2; 
     
     -- lanzamiento de de dados especiales
-    for i in 0..dados_especiales loop
+    for i in 0..dados_especiales - 1 loop
         arreglo(i) := 1 + mod(abs(dbms_random.random()), valor_especial);
+        dbms_output.put_line(i);
     end loop;
-
+    
     -- lanzamiento de dados regulares
-    for i in dados_especiales..dados_regulares + dados_especiales loop
-        arreglo(i) := 1 + mod(abs(dbms_random.random()), valor_especial);
+    for i in dados_especiales..dados_regulares + dados_especiales - 1 loop
+        arreglo(i) := 1 + mod(abs(dbms_random.random()), valor_regular);
+        dbms_output.put_line(i);
     end loop;
 
     -- ordenar resultados obtenidos de mayor a menor
-    for i in 0..dados_regulares + dados_especiales loop
-    	bandera := 0;
-    	for j in 0..dados_regulares + dados_especiales - 1 loop 
-    		if arreglo(j+1) > arreglo(j)
-    		then
-    			temp := arreglo(j);
-    			arreglo(j) := arreglo(j+1);
-    			arreglo(j+i) := temp;
-    			bandera := 1;
-    		end if;
-    	end loop;
+    while contador <= dados_regulares + dados_especiales loop
+        bandera := 0;
+        contador := contador + 1;
+        for j in 0..arreglo.count - 2 loop 
+            if arreglo(j+1)>arreglo(j)
+            then
+                temp := arreglo(j);
+                arreglo(j) := arreglo(j+1);
+                arreglo(j+1) := temp;
+                bandera := 1;
+
+            end if;
+        end loop;
     end loop;
-    
+    dbms_output.put_line(arreglo.count);
     return arreglo;
 end;
 /
