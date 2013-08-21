@@ -52,7 +52,7 @@ begin
     end loop;
 
     -- ordenar resultados obtenidos de mayor a menor
-    while contador <= dados_regulares + dados_especiales loop
+    while contador <= arreglo.count loop
         bandera := 0;
         contador := contador + 1;
         for j in 0..arreglo.count - 2 loop 
