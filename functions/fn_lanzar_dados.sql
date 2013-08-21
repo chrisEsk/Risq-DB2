@@ -42,13 +42,11 @@ begin
     -- lanzamiento de de dados especiales
     for i in 0..dados_especiales - 1 loop
         arreglo(i) := 1 + mod(abs(dbms_random.random()), valor_especial);
-        dbms_output.put_line(i);
     end loop;
     
     -- lanzamiento de dados regulares
     for i in dados_especiales..dados_regulares + dados_especiales - 1 loop
         arreglo(i) := 1 + mod(abs(dbms_random.random()), valor_regular);
-        dbms_output.put_line(i);
     end loop;
 
     -- ordenar resultados obtenidos de mayor a menor
@@ -66,7 +64,7 @@ begin
             end if;
         end loop;
     end loop;
-    dbms_output.put_line(arreglo.count);
+
     return arreglo;
 end;
 /
