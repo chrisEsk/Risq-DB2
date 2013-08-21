@@ -1,6 +1,4 @@
-DELETE FROM unidades;
-
--- alaska 4 regimientos
+-- alaska 6 regimientos
 INSERT INTO unidades (id_unidad, id_colonia, id_tipo_unidad)
 VALUES (1, 1, 1); 
 INSERT INTO unidades (id_unidad, id_colonia, id_tipo_unidad)

@@ -1,5 +1,3 @@
-DELETE FROM equipos CASCADE CONSTRAINTS;
-
 INSERT INTO equipos (id_equipo, color, energia, fase_actual, orden)
 VALUES (1, 'rojo', 20, 0, 1);
 

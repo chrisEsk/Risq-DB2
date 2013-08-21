@@ -1,4 +1,4 @@
-create or replace function fn_lanzar_dados (id_colonia int, es_atacante boolean)
+create or replace function fn_lanzar_dados (p_id_colonia int, es_atacante int)
 return dbms_sql.number_table
 is
     arreglo dbms_sql.number_table;
@@ -14,17 +14,17 @@ begin
     into dados_especiales
     from unidades
     where id_tipo_unidad = 2
-    and id_colonia = id_colonia;
+    and id_colonia = p_id_colonia;
 
     -- cantidad de dados regulares a lanzar
     select count(id_unidad)
     into dados_regulares
     from unidades
     where id_tipo_unidad = 1
-    and id_colonia = id_colonia;
-
+    and id_colonia = p_id_colonia;
+    
     -- los atacantes lanzan n - 1 dados regulares
-    if es_atacante then
+    if es_atacante = 1 then
         dados_regulares := dados_regulares - 1;
     end if;
 
@@ -40,12 +40,12 @@ begin
     
     -- lanzamiento de de dados especiales
     for i in 0..dados_especiales loop
-        arreglo(i) := dbms_random.value(1, valor_especial);
+        arreglo(i) := 1 + mod(abs(dbms_random.random()), valor_especial);
     end loop;
 
     -- lanzamiento de dados regulares
     for i in dados_especiales..dados_regulares + dados_especiales loop
-        arreglo(i) := dbms_random.value(1, valor_regular);
+        arreglo(i) := 1 + mod(abs(dbms_random.random()), valor_especial);
     end loop;
 
     -- ordenar resultados obtenidos de mayor a menor
