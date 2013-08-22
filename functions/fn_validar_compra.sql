@@ -1,4 +1,4 @@
-CREATE OR REPLACE FUNCTION validarCompra
+CREATE OR REPLACE FUNCTION fn_validar_compra
     (tipo IN NUMBER, cant IN NUMBER) 
 
    RETURN NUMBER

@@ -1,4 +1,4 @@
-CREATE OR REPLACE PROCEDURE comprarUnidades(tipo IN NUMBER, cant IN NUMBER, colonia IN NUMBER)
+CREATE OR REPLACE PROCEDURE sp_comprar_unidades(tipo IN NUMBER, cant IN NUMBER, colonia IN NUMBER)
     
 IS
 	compraValidada NUMBER;
@@ -17,14 +17,14 @@ BEGIN
 	SELECT equipo_actual INTO equipo
 	FROM juegos;
 	
-	SELECT validarCompra(tipo,cant) INTO compraValidada
+	SELECT fn_validar_compra(tipo,cant) INTO compraValidada
 	FROM dual;
 	
 	IF compraValidada=0
 		THEN RAISE no_colonia_propia;	
 	END IF;
 
-	SELECT validarColoniaPropia(colonia) INTO coloniaValidada
+	SELECT fn_validar_colonia_propia(colonia) INTO coloniaValidada
 	FROM DUAL;
 	
 	IF coloniaValidada=0

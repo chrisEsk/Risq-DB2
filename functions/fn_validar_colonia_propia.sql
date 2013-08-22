@@ -1,4 +1,4 @@
-CREATE OR REPLACE FUNCTION validarColoniaPropia
+CREATE OR REPLACE FUNCTION fn_validar_colonia_propia
    (colonia IN NUMBER)
 
    RETURN NUMBER
