@@ -29,5 +29,5 @@ BEGIN
 	RETURN resul;
 
 
-END validarCompra;
+END;
 /

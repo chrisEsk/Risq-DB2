@@ -22,7 +22,5 @@ BEGIN
 	END IF;
 
 	RETURN RESUL;
-   
-
-END validarColoniaPropia;
+END;
 /

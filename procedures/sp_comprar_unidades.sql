@@ -14,7 +14,7 @@ BEGIN
 		THEN RAISE cantidad_no_valida; 
 	END IF;
 
-	SELECT equipo_actual INTO equipo
+	SELECT fn_equipo_actual() INTO equipo
 	FROM juegos;
 	
 	SELECT fn_validar_compra(tipo,cant) INTO compraValidada
@@ -39,6 +39,13 @@ BEGIN
 			THEN EXIT;
 		END IF;
 	END LOOP;
-	
-END comprarUnidades;
+	   
+    EXCEPTION
+        WHEN no_suficiente_dinero THEN
+            dbms_output.put_line('No cuenta con suficientes energias');
+        WHEN no_colonia_propia THEN
+            dbms_output.put_line('La colonia no es del equipo');
+        WHEN cantidad_no_valida THEN
+            dbms_output.put_line('La cantidad de unidades no es valida');
+END;
 /
