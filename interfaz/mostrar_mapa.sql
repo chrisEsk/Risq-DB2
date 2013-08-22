@@ -12,11 +12,14 @@ DECLARE
     outp3 varchar2(255) := '';
     CURSOR cur_colonias is
     select
-        codigo, nombre, id_colonia,
-        x, y, equipos.color as color_equipo
+        codigo, colonias.nombre, id_colonia,
+        x, y, equipos.color as color_equipo,
+        continentes.nombre as nombre_continente
     from colonias
     left join equipos
     on colonias.id_equipo = equipos.id_equipo
+    left join continentes
+    on colonias.id_continente = continentes.id_continente
     order by y asc, x asc;
 BEGIN
     FOR c IN cur_colonias LOOP
@@ -29,7 +32,7 @@ BEGIN
         
         outp1 := outp1 || rpad('| ' || c.nombre, w_c);
         outp2 := outp2 || rpad('| ' || cant_com || ' ' || cant_reg, w_c);
-        outp3 := outp3 || rpad('| ' || c.color_equipo, w_c);
+        outp3 := outp3 || rpad('| ' || c.color_equipo, w_c - 3) || ' ' || substr(c.nombre_continente, 0, 2);
                 
         IF c.x = w-1 THEN
             dbms_output.put_line(outp1 || ' |');
