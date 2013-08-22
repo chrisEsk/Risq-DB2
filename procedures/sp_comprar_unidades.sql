@@ -5,6 +5,8 @@ IS
 	contador NUMBER := 0;
 	coloniaValidada NUMBER;
 	costoUnidad tipos_unidades.costo%TYPE;
+	tipoUNidad tipos_unidades.nombre%TYPE;
+	nomColonia colonias.nombre%TYPE;
 	
 	equipo equipos.id_equipo%TYPE;
 
@@ -49,6 +51,16 @@ BEGIN
 		
 		contador := contador + 1;
 	END LOOP;
+
+	SELECT nombre INTO nomColonia
+	FROM colonias
+	WHERE id_colonia=colonia;
+
+	SELECT nombre INTO tipoUnidad
+	FROM tipos_unidades
+	WHERE id_tipo_unidad=tipo;
+
+	sp_bitacora('Compró: '||cant||' '||tipoUnidad||' en '||nomColonia);
 	   
     EXCEPTION
         WHEN no_suficiente_dinero THEN

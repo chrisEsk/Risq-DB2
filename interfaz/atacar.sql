@@ -16,6 +16,7 @@ DECLARE
     cantidad_restante int;
     cantidad_atacante int;
     cantidad_minima int := 2;
+    solo_comandantes int := 0;
 BEGIN
   -- busca el id de la colonia atacante
 	select id_colonia into id_atacante
@@ -69,8 +70,24 @@ BEGIN
             from colonias 
             where id_equipo = id_equipo_defendiente;
 
-            -- translada la colonia al atacante
+            -- verificar si la colonia defendientes aun tienen unidades
             IF cantidad_restante = 0 THEN
+
+              -- busca la cantidad de regimientos de la colonia atacante
+              select count(id_unidad)
+              into solo_comandantes
+              from unidades 
+              where id_colonia = id_atacante 
+              and id_tipo_unidad = 1;
+
+              --define si se pasan regimientos o comandantes
+              IF solo_comandantes > 0 THEN
+                sp_movilizar(id_atacante, id_defendiente, 1, 1);
+              ELSE
+                sp_movilizar(id_atacante, id_defendiente, 1, 2);
+              END IF;
+
+              -- translada la colonia al atacante
               update colonias 
               set id_equipo = (select id_equipo from colonias where id_colonia = id_atacante)
               where id_colonia = id_defendiente;
