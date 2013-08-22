@@ -1,4 +1,4 @@
-CREATE OR REPLACE PROCEDURE sp_movilizar(id_colonia1 number, id_colonia2 number, cant_u number)
+CREATE OR REPLACE PROCEDURE sp_movilizar(id_colonia1 number, id_colonia2 number, cant_u number, tipo_u number)
 AS
 	v_id_equipo_col1 int;
 	v_id_equipo_col2 int;
@@ -33,16 +33,17 @@ BEGIN
 					LOOP
 						DELETE FROM unidades
 						WHERE id_colonia=id_colonia1
+						AND id_tipo_unidad=tipo_u
 						AND ROWNUM =1;
 						
 						INSERT INTO unidades (id_unidad, id_colonia, id_tipo_unidad)
-						VALUES (unidades_seq.nextval,id_colonia2, 1);
+						VALUES (unidades_seq.nextval,id_colonia2, tipo_u);
 					END LOOP;
 				ELSE
 					dbms_output.put_line('Estas colonias no son vecinas.');
 				END IF;
 			ELSE
-				dbms_output.put_line('No puede dejar menos de 1 regimiento en una colonia.');
+				dbms_output.put_line('No puede dejar menos de 1 unidad en una colonia.');
 			END IF;
 		ELSE
 		dbms_output.put_line('La colonia 2 no le pertenece.');
