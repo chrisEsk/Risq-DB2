@@ -1,5 +1,3 @@
-- [x] Dibujar mapa **Ernesto**
-
 1. [x] Inicializar CONTINENTES **Christian**
 2. [x] Inicializar COLONIAS Y establecer las FRONTERAS **Christian**
 3. [x] Crear EQUIPOS (ejércitos) y ERAS **Christian**
@@ -15,3 +13,5 @@
 8. [ ] Al final de la ERA, calcular los puntos de cada ejército y asignar los turnos
 para la siguiente. **Jesús**
 9. [x] Determinar el ejército ganador. **Dylhann**
+
+- [x] Dibujar mapa **Ernesto**
