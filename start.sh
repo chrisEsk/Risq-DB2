@@ -25,8 +25,8 @@ for i in $(ls procedures/*.sql | sort -n); do
     run_sql "$i";
 done;
 
-for i in $(ls datos_prueba/*.sql | sort -n); do
-    run_sql "$i";
-done;
+#for i in $(ls datos_prueba/*.sql | sort -n); do
+#    run_sql "$i";
+#done;
 
 echo "done!";
