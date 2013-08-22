@@ -73,7 +73,7 @@ VALUES (033, 006, 'NEP', 'Nepal', 5, 1, null);
 INSERT INTO Colonias (id_colonia, id_continente, codigo, nombre, x, y, id_equipo)
 VALUES (034, 006, 'KNG', 'New Kong', 6, 1, null);
 INSERT INTO Colonias (id_colonia, id_continente, codigo, nombre, x, y, id_equipo)
-VALUES (035, 006, 'TOK', 'Tokio', 6, 1, null);
+VALUES (035, 006, 'TOK', 'Tokio', 7, 1, null);
 INSERT INTO Colonias (id_colonia, id_continente, codigo, nombre, x, y, id_equipo)
 VALUES (036, 006, 'UR', 'Ur', 5, 2, null);
 INSERT INTO Colonias (id_colonia, id_continente, codigo, nombre, x, y, id_equipo)
