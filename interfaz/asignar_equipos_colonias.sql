@@ -16,7 +16,7 @@ Begin
 	where color = v_color;
 	select count(id_equipo) INTO v_cantColonias from colonias where id_equipo = v_idEquipo;
 	if v_cantColonias = 8 then
-		DBMS_OUTPUT.PUT_LINE('Ya este equipo tiene 8 colonias');
+		DBMS_OUTPUT.PUT_LINE('Este equipo ya tiene 8 colonias');
 	else
 		update colonias set id_equipo = v_idEquipo where codigo = v_cod1;
 		update colonias set id_equipo = v_idEquipo where codigo = v_cod2;
