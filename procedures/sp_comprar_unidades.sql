@@ -4,7 +4,10 @@ IS
 	compraValidada NUMBER;
 	contador NUMBER := 0;
 	coloniaValidada NUMBER;
+	costoUnidad tipos_unidades.costo%TYPE;
+	
 	equipo equipos.id_equipo%TYPE;
+
 	no_colonia_propia EXCEPTION;
 	no_suficiente_dinero EXCEPTION;
 	cantidad_no_valida EXCEPTION;
@@ -27,13 +30,21 @@ BEGIN
 	IF coloniaValidada = 0
 		THEN RAISE no_colonia_propia;
 	END IF;
+	
+	SELECT costo INTO costoUnidad
+	FROM tipos_unidades
+	WHERE id_tipo_unidad=tipo;
 
+	UPDATE equipos
+	SET energia=energia-costoUnidad*cant
+	WHERE id_equipo=equipo;
+	
 	LOOP
 		IF contador >= cant
 			THEN EXIT;
 		END IF;
 		
-        INSERT INTO unidades (id_unidad, id_colonia, id_tipo_unidad)
+        	INSERT INTO unidades (id_unidad, id_colonia, id_tipo_unidad)
 		VALUES (unidades_seq.nextval, colonia, tipo);
 		
 		contador := contador + 1;
