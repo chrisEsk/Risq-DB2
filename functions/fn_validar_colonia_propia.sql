@@ -9,14 +9,11 @@ IS
 	resul NUMBER;
 
 BEGIN
-	SELECT equipo_actual INTO equipo
-	FROM juegos;
-
 	SELECT id_equipo INTO equipoColonia
 	FROM colonias
 	WHERE id_colonia=colonia;
 
-	IF equipo=equipoColonia
+	IF fn_equipo_actual()=equipoColonia
 		THEN resul:=1;
 		ELSE resul:=0;
 	END IF;

@@ -2,7 +2,7 @@ CREATE OR REPLACE PROCEDURE sp_comprar_unidades(tipo IN NUMBER, cant IN NUMBER, 
     
 IS
 	compraValidada NUMBER;
-	contador NUMBER:=1;
+	contador NUMBER := 0;
 	coloniaValidada NUMBER;
 	equipo equipos.id_equipo%TYPE;
 	no_colonia_propia EXCEPTION;
@@ -10,34 +10,33 @@ IS
 	cantidad_no_valida EXCEPTION;
 
 BEGIN
-	IF cant<=0
+	IF cant <= 0
 		THEN RAISE cantidad_no_valida; 
 	END IF;
 
-	SELECT fn_equipo_actual() INTO equipo
-	FROM juegos;
-	
-	SELECT fn_validar_compra(tipo,cant) INTO compraValidada
-	FROM dual;
-	
-	IF compraValidada=0
-		THEN RAISE no_colonia_propia;	
-	END IF;
+	equipo := fn_equipo_actual();
 
-	SELECT fn_validar_colonia_propia(colonia) INTO coloniaValidada
-	FROM DUAL;
+	compraValidada := fn_validar_compra(tipo,cant);
 	
-	IF coloniaValidada=0
+	IF compraValidada = 0
 		THEN RAISE no_suficiente_dinero;
 	END IF;
 
-	LOOP
-		INSERT INTO unidades (id_colonia, id_tipo_unidad)
-		VALUES (colonia, tipo);
+	coloniaValidada := fn_validar_colonia_propia(colonia);
+	
+	IF coloniaValidada = 0
+		THEN RAISE no_colonia_propia;
+	END IF;
 
-		IF contador>= cant
+	LOOP
+		IF contador >= cant
 			THEN EXIT;
 		END IF;
+		
+        INSERT INTO unidades (id_unidad, id_colonia, id_tipo_unidad)
+		VALUES (unidades_seq.nextval, colonia, tipo);
+		
+		contador := contador + 1;
 	END LOOP;
 	   
     EXCEPTION
