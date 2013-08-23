@@ -13,6 +13,7 @@ start functions/fn_son_vecinos.sql;
 start functions/fn_turno_actual.sql;
 start functions/fn_validar_colonia_propia.sql;
 start functions/fn_validar_compra.sql;
+start functions/fn_validar_duenio_continente.sql;
 start procedures/sp_actualizar_orden_equipos.sql;
 start procedures/sp_bitacora.sql;
 start procedures/sp_calcular_puntos.sql;
