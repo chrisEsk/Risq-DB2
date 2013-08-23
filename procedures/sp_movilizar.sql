@@ -8,8 +8,8 @@ AS
 	v_id_tipo_unidad number(3);
 	v_son_vecinos int;
 	v_equipo_actual int;
-	v_desde varchar;
-	v_hacia varchar;
+	v_desde varchar(255);
+	v_hacia varchar(255);
 BEGIN
 	v_contador:=0;
 	v_son_vecinos:=fn_son_vecinos(id_colonia1,id_colonia2);
