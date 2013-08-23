@@ -8,3 +8,6 @@ INSERT INTO equipos (id_equipo, color, energia, fase_actual, orden)
 VALUES (4, 'verde', 20, 0, 4);
 INSERT INTO equipos (id_equipo, color, energia, fase_actual, orden)
 VALUES (5, 'negro', 20, 0, 5);
+--Juegos
+INSERT INTO juegos (equipo_actual, era_actual, cant_eras)
+VALUES (null, 1, 5);
