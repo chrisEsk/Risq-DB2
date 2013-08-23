@@ -12,7 +12,7 @@ DECLARE
     outp3 varchar2(255) := '';
     CURSOR cur_colonias is
     select
-        codigo, colonias.nombre, id_colonia,
+        codigo, id_colonia,
         x, y, equipos.color as color_equipo,
         continentes.nombre as nombre_continente
     from colonias
@@ -30,7 +30,7 @@ BEGIN
         where id_tipo_unidad = 2
         and id_colonia = c.id_colonia;
         
-        outp1 := outp1 || rpad('| ' || c.nombre, w_c);
+        outp1 := outp1 || rpad('| ' || c.codigo, w_c);
         outp2 := outp2 || rpad('| ' || cant_com || ' ' || cant_reg, w_c);
         outp3 := outp3 || rpad('| ' || c.color_equipo, w_c - 3) || ' ' || substr(c.nombre_continente, 0, 2);
                 
