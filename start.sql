@@ -1,8 +1,5 @@
 start risqbd-sql.sql;
-start initial_inserts/1_fill_continentes.sql;
-start initial_inserts/2_fill_colonias.sql;
-start initial_inserts/3_fill_tipos_unidades.sql;
-start initial_inserts/4_fill_equipos.sql;
+start initial_inserts/fill_all.sql;
 start functions/fn_ejercito_mayor_colonias.sql;
 start functions/fn_equipo_actual.sql;
 start functions/fn_era_actual.sql;
