@@ -60,7 +60,8 @@ BEGIN
 
 		UPDATE turnos
 		SET puntaje=puntos
-		WHERE id_equipo=equipo;
+		WHERE id_equipo=equipo
+		AND num_era = fn_era_actual();
 		
 		END LOOP;
 	
