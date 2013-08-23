@@ -83,22 +83,23 @@ BEGIN
             -- se lanzan los dados
             result_atacante := fn_lanzar_dados(id_atacante, 1);
             result_defendiente := fn_lanzar_dados(id_defendiente, 0);
-
+			
             -- determina la menor cantidad de pares a comparar
             IF result_atacante.count > result_defendiente.count THEN
               cantidad := result_defendiente.count;
             ELSE 
               cantidad := result_atacante.count;
             END IF;
-
+			
             -- determina el ganador de cada par y elimina los regimientos
-            FOR i IN 0..cantidad LOOP
+            FOR i IN 0..cantidad-1 LOOP
               IF result_atacante(i) > result_defendiente(i) THEN
                 perdidas_defendiente := perdidas_defendiente + 1;
                 sp_eliminar_unidad(id_defendiente);
               ELSE
                 perdidas_atacante := perdidas_atacante + 1;
                 sp_eliminar_unidad(id_atacante);
+				
               END IF;
             END LOOP;
             
@@ -111,13 +112,17 @@ BEGIN
             bitacora := 'El equipo ' || color_atacante || ' perdio ' || perdidas_atacante || ' unidades. ';
             sp_bitacora(bitacora);
             bitacora := 'El equipo ' || color_atacante || ' perdio ' || perdidas_defendiente || ' unidades. ';
-            
+            sp_bitacora(bitacora);
+			
+			
             -- busca la cantidad de regimientos restantes de la colonia defendiente
             select count(*) 
             into cantidad_restante
-            from colonias 
-            where id_equipo = id_equipo_defendiente;
-
+            from unidades 
+            where id_colonia = id_defendiente;
+			
+			dbms_output.put_line(cantidad_restante);
+			
             -- verificar si la colonia defendientes aun tienen unidades
             IF cantidad_restante = 0 THEN
             
@@ -128,19 +133,19 @@ BEGIN
               where id_colonia = id_atacante 
               and id_tipo_unidad = 1;
 
-              --define si se pasan regimientos o comandantes
-              IF solo_comandantes > 0 THEN
-                sp_movilizar(id_atacante, id_defendiente, 1, 1);
-              ELSE
-                sp_movilizar(id_atacante, id_defendiente, 1, 2);
-              END IF;
-
               -- translada la colonia al atacante
               update colonias 
               set id_equipo = (select id_equipo from colonias where id_colonia = id_atacante)
               where id_colonia = id_defendiente;
               bitacora := 'El equipo ' || color_atacante || ' gano ' || nombre_defendiente || '. ';
               sp_bitacora(bitacora);
+			  
+			  --define si se pasan regimientos o comandantes
+              IF solo_comandantes > 0 THEN
+                sp_movilizar(id_atacante, id_defendiente, 1, 1);
+              ELSE
+                sp_movilizar(id_atacante, id_defendiente, 1, 2);
+              END IF;
             END IF;
       ELSE
         dbms_output.put_line('Las colonias pertenecen al mismo equipo.');
@@ -155,6 +160,7 @@ BEGIN
   
     EXCEPTION                 
         WHEN no_data_found THEN
+
             dbms_output.put_line('--ERROR--');
             IF id_atacante = -1 THEN
                 dbms_output.put_line('No se encontro la colonia atacante');

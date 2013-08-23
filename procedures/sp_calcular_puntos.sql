@@ -68,3 +68,4 @@ BEGIN
 	CLOSE equipos_cursor;
 
 END;
+/
