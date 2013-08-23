@@ -14,6 +14,15 @@ DECLARE
 	id_col colonias.id_colonia%TYPE;
 	v_fase_actual int;
 BEGIN
+    -- buscar la fase del equipo actual;
+    select fase_actual into v_fase_actual 
+    from equipos
+    where id_equipo = fn_equipo_actual();
+    
+    IF v_fase_actual = 2 THEN
+    	dbms_output.put_line('Ya finalizo la  de ataque');
+   	return;
+    END IF;
 
 	--buscar el id del tipo_unidad;
 
@@ -30,3 +39,4 @@ BEGIN
 	--realizar compra;
 	sp_comprar_unidades(id_tipo, cant, id_col);
 END;
+/
