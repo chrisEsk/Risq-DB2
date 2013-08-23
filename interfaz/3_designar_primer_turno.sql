@@ -6,7 +6,7 @@ Declare
 	v_cantReg5 number;
 	CURSOR getEquipos is
 		select id_equipo from equipos order by dbms_random.value;
-	i number = 0;
+	i number := 0;
 	v_colorPrimerTurno varchar2(10);
 	v_idEquipo varchar2(3);
 Begin
