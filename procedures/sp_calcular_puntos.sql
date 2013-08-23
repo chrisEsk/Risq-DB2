@@ -1,67 +1,60 @@
 CREATE OR REPLACE PROCEDURE sp_calcular_puntos
     
 IS
-	cantTerritorios NUMBER:=0;
-	cantEnergias equipos.energia%TYPE:=0;
-	cantReg	NUMBER:=0;
-	cantCom	NUMBER:=0;
-	cant NUMBER:=0;
-	puntos NUMBER:=0;
+	CURSOR equipos_cursor IS 	select c.id_equipo,
+						count(c.id_colonia),
+						e.energia
+					from colonias c
+					JOIN equipos e oN(e.id_equipo=c.id_equipo)
+					where c.id_equipo is not null
+					group by c.id_equipo, e.energia
+					order by c.id_equipo asc;
 
-	equipoActual equipos.id_equipo%TYPE;
-	turnoActual turnos.id_turno%TYPE;
-	id_col colonias.id_colonia%TYPE;
+	equipo equipos.id_equipo%TYPE:=0;
+	cantColonias NUMBER:=0;
+	cantEnergias NUMBER:=0;
+	puntos NUMBER:=0;
+	cantReg NUMBER:=0;
+	cantCom NUMBER:=0;
 	
-	CURSOR cols_cursor IS SELECT id_colonia FROM colonias;
+
 
 BEGIN
-	equipoActual:=fn_equipo_actual();
-	turnoActual:=fn_turno_actual();
+	OPEN equipos_cursor;
 	
-	SELECT energia INTO cantEnergias
-	FROM equipos
-	WHERE id_equipo=equipoActual;
-
-	OPEN cols_cursor;	
 	LOOP
-		IF cols_cursor%NOTFOUND
+		IF equipos_cursor%NOTFOUND
 			THEN EXIT;
 		END IF;
 		
-		FETCH cols_cursor INTO id_col;
-		IF fn_validar_colonia_propia(id_col)=1
-			THEN
-				cantTerritorios:=cantTerritorios+1;
-			
-				SELECT count(id_unidad) INTO cant
-				FROM unidades
-				WHERE id_colonia=id_col
-				AND id_tipo_unidad=1;
-			
-				cantReg:=cantReg+cant;
-			
-				SELECT count(id_unidad) INTO cant
-				FROM unidades
-				WHERE id_colonia=id_col
-				AND id_tipo_unidad=2;
+		puntos:=0;
 
-				cantCom:=cantCom+cant;
-		END IF;
+		FETCH equipos_cursor INTO equipo, cantColonias, cantEnergias;
+
+		SELECT count(u.id_unidad) INTO cantReg
+		FROM unidades u
+		JOIN colonias c ON(u.id_colonia=c.id_colonia)
+		WHERE u.id_tipo_unidad=1
+		AND c.id_equipo=equipo;
+
+		SELECT count(u.id_unidad) INTO cantCom
+		FROM unidades u
+		JOIN colonias c ON(u.id_colonia=c.id_colonia)
+		WHERE u.id_tipo_unidad=2
+		AND c.id_equipo=equipo;
+		
+		puntos:=puntos+cantReg;
+		puntos:=puntos+cantEnergias;
+		puntos:=puntos+cantColonias*3;
+		puntos:=puntos+cantCom*2;
+
+		UPDATE turnos
+		SET puntaje=puntos
+		WHERE id_equipo=equipo;
 		
 	END LOOP;
-	CLOSE cols_cursor;
 	
-	puntos:=puntos+cantEnergias;
-	puntos:=puntos+cantReg;	
-	puntos:=puntos+cantTerritorios*3;
-	puntos:=puntos+cantCom*2;
+	CLOSE equipos_cursor;
 
-	UPDATE turnos
-	SET puntaje=puntos
-	WHERE id_turno=turnoActual
-	AND id_equipo=equipoActual;
-	   
-EXCEPTION
-	WHEN NO_DATA_FOUND THEN cant:=0;     
 END;
 /

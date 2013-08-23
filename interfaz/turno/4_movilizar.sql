@@ -5,13 +5,7 @@ colonia1 varchar(3);
 colonia2 varchar(3);
 cant_unidades number;
 tipo_unidad number;
-unidades_disponibles number;
-
 BEGIN
-
-	SELECT COUNT(id_unidad) INTO unidades_disponibles
-	FROM unidades
-	WHERE id_colonia = colonia1;
 	
 	-- busca el id de la colonia de la que se desean sacar unidades
 	select id_colonia into colonia1
@@ -28,6 +22,14 @@ BEGIN
 	tipo_unidad := '&tipo_unidad';
 	cant_unidades := &cant_unidades;
 	
-	sp_movilizar(colonia1, colonia2, cant_unidades, tipo_unidad);
+	IF colonia1 != null THEN
+		IF colonia2 != null THEN
+			sp_movilizar(colonia1, colonia2, cant_unidades, tipo_unidad);
+		ELSE
+			dbms_output.put_line('La colonia 2 no existe.');
+		END IF;
+	ELSE
+		dbms_output.put_line('La colonia 1 no existe.');
+	END IF;
 END;
 /
