@@ -35,7 +35,7 @@ BEGIN
 	
 	-- actualizar la fase del equipo actual
 	IF v_fase_actual = 3 THEN
-	    dbms_output.put_line('Ya finalizo la fase de ataque');
+	    dbms_output.put_line('Ya finalizo la  de ataque');
 		return;
 	ELSE
 		update equipos
@@ -103,9 +103,13 @@ BEGIN
             END LOOP;
             
 			bitacora := 'El equipo ' || color_atacante || ' ataco al equipo ' || color_defendiente || '. ';
+			sp_bitacora(bitacora);
 			bitacora := 'El equipo ' || color_atacante || ' ataco con la colonia ' || nombre_atacante || '. ';
+			sp_bitacora(bitacora);
 			bitacora := 'El equipo ' || color_defendiente || ' defendio con la colonia ' || nombre_defendiente || '. ';
+			sp_bitacora(bitacora);
 			bitacora := 'El equipo ' || color_atacante || ' perdio ' || perdidas_atacante || ' unidades. ';
+			sp_bitacora(bitacora);
 			bitacora := 'El equipo ' || color_atacante || ' perdio ' || perdidas_defendiente || ' unidades. ';
 			
             -- busca la cantidad de regimientos restantes de la colonia defendiente
