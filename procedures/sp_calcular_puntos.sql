@@ -16,6 +16,7 @@ IS
 	puntos NUMBER:=0;
 	cantReg NUMBER:=0;
 	cantCom NUMBER:=0;
+	bonus NUMBER:=0;
 	
 	duenio NUMBER:=-1;
 	
@@ -44,15 +45,18 @@ BEGIN
 		JOIN colonias c ON(u.id_colonia=c.id_colonia)
 		WHERE u.id_tipo_unidad=2
 		AND c.id_equipo=equipo;
+
+		duenio:= sp_verificar_duenio_continente(equipo);
+
+		IF duenio!=-1
+			THEN SELECT valor into bonus from continentes where id_continente=duenio;
+		END IF;
 		
 		puntos:=puntos+cantReg;
 		puntos:=puntos+cantEnergias;
 		puntos:=puntos+cantColonias*3;
 		puntos:=puntos+cantCom*2;
-
-		duenio:= sp_verificar_duenio_continente(equipo);
-
-		decode(duenio, 1, puntos:=puntos+10, 2, puntos:=puntos+5, 3, puntos:=puntos+11 , 4, puntos:=puntos+8, 5, puntos:=puntos+14, 6,puntos:=puntos+4);
+		puntos:=puntos+bonus;
 
 		UPDATE turnos
 		SET puntaje=puntos
