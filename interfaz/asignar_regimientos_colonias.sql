@@ -8,12 +8,13 @@ Declare
 	v_idColonia number;
 	v_cantRegActuales number;
 	v_idEquipoFetch number;
+	v_idColoniaFetch number;
 
 	CURSOR query is
-		select id_equipo from colonias;
+		select id_equipo, id_colonia from colonias;
 Begin
 	-- no mas de 24 reg en total en las colonias de este color
-	select id_equipo into v_idEquipo 
+	select id_equipo into v_idEquipo
 	from equipos
 	where color = v_color;
 
@@ -25,7 +26,7 @@ Begin
 	group by e.color;
 
 	select id_colonia into v_idColonia
-	from colonias 
+	from colonias
 	where codigo = v_codColonia;
 
 	if v_cantRegActuales >= v_maxRegimientos OR v_cantRegActuales+v_cantRegimiento >= v_maxRegimientos then
@@ -35,14 +36,14 @@ Begin
 
 		OPEN query;
 		LOOP
-			FETCH query INTO v_idEquipoFetch;
-			
-			if v_idEquipoFetch = v_idEquipo then
+			FETCH query INTO v_idEquipoFetch, v_idColoniaFetch;
+
+			if v_idEquipoFetch = v_idEquipo AND v_idColoniaFetch = v_idColonia then
 				for c in 1..v_cantRegimiento loop
 					INSERT INTO unidades (id_unidad, id_colonia, id_tipo_unidad) VALUES (unidades_seq.nextval, v_idColonia, 1);
 				end loop;
 			End if;
-			
+
 		EXIT WHEN query%NOTFOUND;
 		END LOOP;
 		CLOSE query;
