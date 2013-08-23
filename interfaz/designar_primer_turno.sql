@@ -4,7 +4,11 @@ Declare
 	v_cantReg3 number;
 	v_cantReg4 number;
 	v_cantReg5 number;
-
+	CURSOR getEquipos is
+		select id_equipo from equipos order by dbms_random.value;
+	i number = 0;
+	v_colorPrimerTurno varchar2(10);
+	v_idEquipo varchar2(3);
 Begin
 	--cada equipo debe tener 24 regs en total.
 	select sum(count(u.id_unidad)) into v_cantReg1
@@ -50,21 +54,19 @@ Begin
 		v_cantReg5 = 24 AND
 		then
 		--ordenar equipos a lo random
+		for equipo in getEquipos loop
+			i := i + 1;
+			update equipos where equipo.id_equipo = id_equipo set orden = i
+		end loop;
 
-		--DBMS_RANDOM.value(low => 1, high => 5)
-		update equipos set orden = 5 where id_equipo = 1;
-		update equipos set orden = 5 where id_equipo = 1;
-		update equipos set orden = 5 where id_equipo = 1;
-		update equipos set orden = 5 where id_equipo = 1;
-		update equipos set orden = 5 where id_equipo = 1;
+		select color, id_equipo into v_colorPrimerTurno, v_idEquipo from equipos
+		where orden = 1;
 
+		DBMS_OUTPUT.PUT_LINE('EL primer equipo en jugar es: ' v_colorPrimerTurno);
+		update juegos set equipo_actual = v_idEquipo;
 
 	else
 		DBMS_OUTPUT.PUT_LINE('Algun equipo no tiene 24 regimientos asignados... executar pruebas/ver_regimientos_color.sql');
 	end if;
-
-	
-
-	update juegos set equipo_actual = n where 1 = 1;
 End;
 /
