@@ -17,6 +17,8 @@ IS
 	cantReg NUMBER:=0;
 	cantCom NUMBER:=0;
 	
+	duenio NUMBER:=-1;
+	
 
 
 BEGIN
@@ -48,11 +50,15 @@ BEGIN
 		puntos:=puntos+cantColonias*3;
 		puntos:=puntos+cantCom*2;
 
+		duenio:= sp_verificar_duenio_continente(equipo);
+
+		decode(duenio, 1, puntos:=puntos+10, 2, puntos:=puntos+5, 3, puntos:=puntos+11 , 4, puntos:=puntos+8, 5, puntos:=puntos+14, 6,puntos:=puntos+4);
+
 		UPDATE turnos
 		SET puntaje=puntos
 		WHERE id_equipo=equipo;
 		
-	END LOOP;
+		END LOOP;
 	
 	CLOSE equipos_cursor;
 

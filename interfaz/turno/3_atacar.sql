@@ -18,6 +18,11 @@ DECLARE
     cantidad_minima int := 2;
     solo_comandantes int := 0;
 BEGIN
+  
+  update equipos
+  set fase_actual = 3
+  where id_equipo = fn_equipo_actual();
+
   -- busca el id de la colonia atacante
 	select id_colonia into id_atacante
 	from colonias
@@ -102,6 +107,7 @@ BEGIN
   ELSE
     dbms_output.put_line('La colonia no cumple con la minima cantidad para realizar el ataque.');
   END IF;
+  
     EXCEPTION                 
         WHEN no_data_found THEN
             dbms_output.put_line('--ERROR--');

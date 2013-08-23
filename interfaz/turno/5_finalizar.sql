@@ -5,6 +5,8 @@ DECLARE
     orden_equipo_actual int;
     sig_equipo int;
     primer_equipo int;
+    equipo_ganador int;
+	nombre_ganador varchar(20);
 BEGIN
     select count(id_equipo)
     into cant_equipos
@@ -17,6 +19,8 @@ BEGIN
     
     IF orden_equipo_actual = cant_equipos THEN
         dbms_output.put_line('Se ha finalizado la era');
+        
+        sp_reabastecer_equipos();
         
         select id_equipo
         into primer_equipo
@@ -31,6 +35,14 @@ BEGIN
         
         IF fn_juego_terminado() = 1 THEN
             dbms_output.put_line('Ha terminado el juego');
+            
+            -- copy paste de mostrar_ganador.sql
+        	equipo_ganador := fn_ejercito_mayor_colonias();
+            select color
+            into nombre_ganador
+            from equipos
+            where id_equipo = equipo_ganador;
+            dbms_output.put_line('Ganador:' ||nombre_ganador);
         END IF;
     ELSE
         select id_equipo
