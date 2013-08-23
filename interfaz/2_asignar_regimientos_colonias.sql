@@ -9,7 +9,7 @@ Declare
 	v_cantRegActuales number;
 	v_idEquipoFetch number;
 	v_idColoniaFetch number;
-
+	v_sumaRegimientos number;
 	CURSOR query is
 		select id_equipo, id_colonia from colonias;
 Begin
@@ -29,8 +29,9 @@ Begin
 	from colonias
 	where codigo = v_codColonia;
 
-	if v_cantRegActuales >= v_maxRegimientos OR v_cantRegActuales+v_cantRegimiento >= v_maxRegimientos then
-
+	v_sumaRegimientos := v_cantRegActuales + v_cantRegimiento;
+	--DBMS_OUTPUT.PUT_LINE(v_sumaRegimientos);
+	if v_cantRegActuales >= v_maxRegimientos OR v_sumaRegimientos > v_maxRegimientos then
 		DBMS_OUTPUT.PUT_LINE('Ya este equipo tiene los regimientos asignados en sus colonias...');
 	else
 
@@ -48,7 +49,7 @@ Begin
 		END LOOP;
 		CLOSE query;
 
-		DBMS_OUTPUT.PUT_LINE('El equipo ' || v_color || ' inserto ' || v_cantRegimiento || ' en la colonia ' || v_codColonia);
+		DBMS_OUTPUT.PUT_LINE('El equipo ' || v_color || ' inserto ' || v_cantRegimiento || ' regimientos en la colonia ' || v_codColonia);
 
 		select sum(count(u.id_unidad)) into v_cantRegActuales
 		from equipos e

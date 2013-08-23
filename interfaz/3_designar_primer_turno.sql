@@ -66,7 +66,8 @@ Begin
 		update juegos set equipo_actual = v_idEquipo;
 
 	else
-		DBMS_OUTPUT.PUT_LINE('Algun equipo no tiene 24 regimientos asignados... executar pruebas/ver_regimientos_color.sql');
+		DBMS_OUTPUT.PUT_LINE('Algun equipo no tiene 24 regimientos asignados...');
+		DBMS_OUTPUT.PUT_LINE('Ejecutar ver_cant_regimientos_equipos.sql o pruebas/ver_regimientos_color.sql');
 	end if;
 End;
 /
