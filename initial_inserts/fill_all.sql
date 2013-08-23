@@ -97,9 +97,9 @@ VALUES (039, 006, 'HAN', 'Hanoi', 5, 3, null);
 INSERT INTO Colonias (id_colonia, id_continente, codigo, nombre, x, y, id_equipo)
 VALUES (040, 006, 'MAL', 'Malay', 7, 3, null);
 INSERT INTO Tipos_Unidades (id_tipo_unidad, nombre, costo, poder_max, valor)
-VALUES (1, 'Regimiento', 1, 8, 1);
+VALUES (1, 'Regimiento', 1, 6, 1);
 INSERT INTO Tipos_Unidades (id_tipo_unidad, nombre, costo, poder_max, valor)
-VALUES (2, 'Comandante', 3, 6, 2);
+VALUES (2, 'Comandante', 3, 8, 2);
 INSERT INTO equipos (id_equipo, color, energia, fase_actual, orden)
 VALUES (1, 'rojo', 20, 0, null);
 INSERT INTO equipos (id_equipo, color, energia, fase_actual, orden)
