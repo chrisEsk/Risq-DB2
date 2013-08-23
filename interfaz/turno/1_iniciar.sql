@@ -9,15 +9,19 @@ BEGIN
     where id_equipo = fn_equipo_actual()
     and num_era = fn_era_actual();
     
-    IF turno_comenzado := 1 THEN
+    -- verificar que no haya comenzado el turno
+    IF turno_comenzado = 1 THEN
         dbms_output.put_line('Ya se comenzo el turno actual');
-        EXIT;
+        RETURN;
     END IF;
 
+    -- crear el turno
     insert into turnos (id_turno, id_equipo, puntaje, num_era)
-    values (seq_turnos.nextval, fn_equipo_actual(), 0, fn_era_actual());
+    values (turnos_seq.nextval, fn_equipo_actual(), 0, fn_era_actual());
     
+    -- actualizar la fase del equipo actual
     update equipos
     set fase_actual = 1
     where id_equipo = fn_equipo_actual();
 END;
+/
