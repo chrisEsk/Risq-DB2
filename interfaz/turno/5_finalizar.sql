@@ -19,6 +19,10 @@ BEGIN
     
     IF orden_equipo_actual = cant_equipos THEN
         dbms_output.put_line('Se ha finalizado la era');
+        	
+       	sp_calcular_puntos();
+       	
+       	sp_actualizar_orden_equipos();
         
         sp_reabastecer_equipos();
         
