@@ -46,7 +46,7 @@ BEGIN
 		WHERE u.id_tipo_unidad=2
 		AND c.id_equipo=equipo;
 
-		duenio:= sp_verificar_duenio_continente(equipo);
+		duenio:= fn_validar_duenio_continente(equipo);
 
 		IF duenio!=-1
 			THEN SELECT valor into bonus from continentes where id_continente=duenio;
@@ -67,4 +67,3 @@ BEGIN
 	CLOSE equipos_cursor;
 
 END;
-/
