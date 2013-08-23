@@ -8,6 +8,8 @@ AS
 	v_id_tipo_unidad number(3);
 	v_son_vecinos int;
 	v_equipo_actual int;
+	v_desde varchar;
+	v_hacia varchar;
 BEGIN
 	v_contador:=0;
 	v_son_vecinos:=fn_son_vecinos(id_colonia1,id_colonia2);
@@ -36,9 +38,17 @@ BEGIN
 						AND id_tipo_unidad=tipo_u
 						AND ROWNUM =1;
 						
+						select nombre into v_desde
+						from colonias where id_colonia = id_colonia1;
+						
+						select nombre into v_hacia
+						from colonias where id_colonia = id_colonia2;
+						
 						INSERT INTO unidades (id_unidad, id_colonia, id_tipo_unidad)
 						VALUES (unidades_seq.nextval,id_colonia2, tipo_u);
 					END LOOP;
+
+					sp_bitacora('Se movieron '||cant_u||' unidades desde '||v_desde||' hacia '||v_hacia);
 				ELSE
 					dbms_output.put_line('Estas colonias no son vecinas.');
 				END IF;
