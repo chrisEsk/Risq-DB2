@@ -19,5 +19,4 @@ begin
 return id_era_actual;
 
 end;
-
 /
