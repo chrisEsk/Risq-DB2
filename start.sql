@@ -1,0 +1,24 @@
+start risqbd-sql.sql;
+start initial_inserts/1_fill_continentes.sql;
+start initial_inserts/2_fill_colonias.sql;
+start initial_inserts/3_fill_tipos_unidades.sql;
+start initial_inserts/4_fill_equipos.sql;
+start functions/fn_ejercito_mayor_colonias.sql;
+start functions/fn_equipo_actual.sql;
+start functions/fn_era_actual.sql;
+start functions/fn_get_puntaje.sql;
+start functions/fn_juego_terminado.sql;
+start functions/fn_lanzar_dados.sql;
+start functions/fn_son_vecinos.sql;
+start functions/fn_turno_actual.sql;
+start functions/fn_validar_colonia_propia.sql;
+start functions/fn_validar_compra.sql;
+start procedures/sp_actualizar_orden_equipos.sql;
+start procedures/sp_bitacora.sql;
+start procedures/sp_calcular_puntos.sql;
+start procedures/sp_comprar_unidades.sql;
+start procedures/sp_eliminar_unidad.sql;
+start procedures/sp_movilizar.sql;
+start procedures/sp_reabastecer_equipos.sql;
+start procedures/sp_ver_colonias_continentes.sql;
+
