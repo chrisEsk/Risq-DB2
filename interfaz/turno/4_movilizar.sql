@@ -1,3 +1,5 @@
+set serveroutput on;
+
 DECLARE
 colonia1 varchar(3);
 colonia2 varchar(3);
@@ -23,8 +25,9 @@ BEGIN
 	where codigo = '&colonia2'
 	and id_equipo = fn_equipo_actual();
 	
-	tipo_unidad:='&tipo_unidad' ;
+	tipo_unidad := '&tipo_unidad';
+	cant_unidades := &cant_unidades;
 	
-	dbms_output.put_line(colonia1||' '||colonia2||' '||tipo_unidad||' '||unidades_disponibles);
-	
+	sp_movilizar(colonia1, colonia2, cant_unidades, tipo_unidad);
 END;
+/
