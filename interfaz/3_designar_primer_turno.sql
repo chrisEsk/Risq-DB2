@@ -51,18 +51,18 @@ Begin
 		v_cantReg2 = 24 AND
 		v_cantReg3 = 24 AND
 		v_cantReg4 = 24 AND
-		v_cantReg5 = 24 AND
+		v_cantReg5 = 24 
 		then
 		--ordenar equipos a lo random
 		for equipo in getEquipos loop
 			i := i + 1;
-			update equipos where equipo.id_equipo = id_equipo set orden = i
+			update equipos set orden = i where equipo.id_equipo = id_equipo;
 		end loop;
 
 		select color, id_equipo into v_colorPrimerTurno, v_idEquipo from equipos
 		where orden = 1;
 
-		DBMS_OUTPUT.PUT_LINE('EL primer equipo en jugar es: ' v_colorPrimerTurno);
+		DBMS_OUTPUT.PUT_LINE('EL primer equipo en jugar es: ' ||  v_colorPrimerTurno);
 		update juegos set equipo_actual = v_idEquipo;
 
 	else
