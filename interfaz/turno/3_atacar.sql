@@ -47,14 +47,14 @@ BEGIN
     select id_colonia,id_equipo, nombre
     into id_atacante,id_equipo_atacante,nombre_atacante
     from colonias
-    where codigo = '&cod_atacante'
+    where codigo = upper('&cod_atacante')
     and id_equipo = fn_equipo_actual();
     
   -- busca el id de la colonia defendiente
     select id_colonia, id_equipo , nombre
     into id_defendiente, id_equipo_defendiente,nombre_defendiente
     from colonias
-    where codigo = '&cod_defendiente';
+    where codigo = upper('&cod_defendiente');
 
       -- buscar la cantidad de regimientos en la colonia atacante
       select count(id_unidad)
@@ -121,7 +121,6 @@ BEGIN
             from unidades 
             where id_colonia = id_defendiente;
 			
-			dbms_output.put_line(cantidad_restante);
 			
             -- verificar si la colonia defendientes aun tienen unidades
             IF cantidad_restante = 0 THEN
