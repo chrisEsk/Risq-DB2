@@ -10,13 +10,13 @@ BEGIN
 	-- busca el id de la colonia de la que se desean sacar unidades
 	select id_colonia into colonia1
 	from colonias
-	where codigo = '&colonia1'
+	where codigo = upper('&colonia1')
 	and id_equipo = fn_equipo_actual();
 	
 	-- busca el id de la colonia en la que se desean introducir unidades
 	select id_colonia into colonia2
 	from colonias
-	where codigo = '&colonia2'
+	where codigo = upper('&colonia2')
 	and id_equipo = fn_equipo_actual();
 	
 	tipo_unidad := '&tipo_unidad';
