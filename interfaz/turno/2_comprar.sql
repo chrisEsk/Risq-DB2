@@ -28,13 +28,13 @@ BEGIN
 
 	select id_tipo_unidad into id_tipo
 	from tipos_unidades
-	where nombre='&tipo';
+	where nombre=initcap('&tipo');
 	
 
 	--buscar id colonia destino;
 	select id_colonia into id_col
 	from colonias
-	where codigo='&cod_col';
+	where codigo=upper('&cod_col');
 
 	--realizar compra;
 	sp_comprar_unidades(id_tipo, cant, id_col);
